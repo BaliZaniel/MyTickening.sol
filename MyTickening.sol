@@ -51,4 +51,7 @@ function purchaseTickets(uint256 _numTickets) external enoughTicketsAvailable(_n
 function getTicketsPurchased(address _buyer) external view returns (uint256) {
         return ticketsPurchased[_buyer];
     }
+function getTicketDetails() external view returns (uint256, uint256, uint256, uint256) {
+        return (ticketPrice, totalTickets, ticketsSold, block.timestamp);
+    }
 }
