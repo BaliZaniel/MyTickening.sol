@@ -48,5 +48,7 @@ function purchaseTickets(uint256 _numTickets) external enoughTicketsAvailable(_n
 
         emit TicketPurchased(msg.sender, _numTickets);
     }
-
+function getTicketsPurchased(address _buyer) external view returns (uint256) {
+        return ticketsPurchased[_buyer];
+    }
 }
