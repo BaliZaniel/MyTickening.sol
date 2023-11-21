@@ -32,6 +32,21 @@ contract DecentralizedTicketing is Ownable {
         ticketPrice = _ticketPrice;
         totalTickets = _totalTickets;
     }
+function purchaseTickets(uint256 _numTickets) external enoughTicketsAvailable(_numTickets) {
+        require(_numTickets > 0, "Number of tickets must be greater than 0");
 
+        uint256 totalCost = ticketPrice * _numTickets;
+
+        // Transfer ticket tokens from the buyer to the contract
+        ticketToken.safeTransferFrom(msg.sender, address(this), totalCost);
+
+        // Update buyer's ticket count
+        ticketsPurchased[msg.sender] += _numTickets;
+
+        // Update total tickets sold
+        ticketsSold += _numTickets;
+
+        emit TicketPurchased(msg.sender, _numTickets);
+    }
 
 }
